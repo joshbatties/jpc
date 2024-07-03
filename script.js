@@ -1,12 +1,12 @@
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
+console.log("Script loaded");
+  
 window.addEventListener('scroll', function() {
     const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 0) {
-        navbar.classList.add('scrolled');
+    if (window.scrollY > 1) {
+        navbar.style.backgroundColor = 'white';
+        console.log("Scrolled")
     } else {
-        navbar.classList.remove('scrolled');
+        navbar.style.backgroundColor = ''; // Reset to default
+        console.log("Not Scrolled")
     }
 });
