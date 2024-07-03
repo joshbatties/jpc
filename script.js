@@ -10,3 +10,12 @@ window.addEventListener('scroll', function() {
         navbar.classList.remove('scrolled');
     }
 });
+
+document.getElementById('what-we-do-btn').addEventListener('click', function() {
+    const extraButtons = document.getElementById('extra-buttons');
+    if (extraButtons.classList.contains('hidden')) {
+        extraButtons.classList.remove('hidden');
+    } else {
+        extraButtons.classList.add('hidden');
+    }
+});

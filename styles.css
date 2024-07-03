@@ -65,6 +65,11 @@ body, html {
     transform: scale(1.1);
 }
 
+.navbar .nav {
+    display: flex;
+    align-items: center;
+}
+
 .navbar .nav button {
     background: none;
     border: none;
@@ -80,6 +85,35 @@ body, html {
 }
 
 .navbar .nav button:hover {
+    color: #ccc;
+}
+
+#extra-buttons.hidden {
+    display: none;
+}
+
+#extra-buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+}
+
+#extra-buttons button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.3s ease;
+}
+
+.navbar.scrolled #extra-buttons button {
+    color: grey;
+}
+
+#extra-buttons button:hover {
     color: #ccc;
 }
 
@@ -123,6 +157,7 @@ body, html {
     margin: 0;
     font-weight: bold; /* Make text bold */
 }
+
 /* FOOTER */ 
 footer {
     display: flex;
