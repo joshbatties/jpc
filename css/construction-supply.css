@@ -121,45 +121,14 @@ body, html {
     color: #ccc;
 }
 
-.white-section {
-    height: 65vh; /* 30% larger than the previous 50vh */
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.white-section h2 {
-    font-size: 3em; /* Increased font size */
-    margin-bottom: 40px;
-}
-
-.services {
-    display: flex;
-    justify-content: space-around;
+/* INFO */
+.supply {
     width: 100%;
 }
 
-.service {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.service img {
-    width: 300px; /* 50% larger than the previous 200px */
-    height: auto;
-    margin-bottom: 10px;
-}
-
-.service p {
-    font-size: 1.8em; /* 50% larger than the previous 1.2em */
-    margin: 0;
-    font-weight: bold; /* Make text bold */
+.supply-info {
+    margin: auto;
+    width: 80%;
 }
 
 /* FOOTER */ 
@@ -171,7 +140,7 @@ footer {
     height: 25vh;
     position: relative;
     color: white;
-    background: linear-gradient(to bottom, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5)), url('./assets/footer.png');
+    background: linear-gradient(to bottom, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5)), url('../assets/footer.png');
     background-size: cover;
     background-position: center;
 }
