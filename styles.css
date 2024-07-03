@@ -59,12 +59,22 @@ body, html {
     color: #ccc;
 }
 
+/* TEST */
+.middle {
+    height: 50vh;
+}
+
 /* FOOTER */ 
 footer {
     display: flex;
+    justify-content: center;
+    align-items: center;
     height: 25vh;
     position: relative;
-    background-color: white; /* Add a background color to see it clearly */
+    color: white;
+    background: linear-gradient(to bottom, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5)), url('./assets/footer.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .footer-left {
@@ -84,8 +94,12 @@ footer {
     margin-bottom: 1em;
 }
 
-.form-input-field input {
-    width: 80%;
+#email {
+    width: 75%;
+}
+
+#submit {
+    width: 15%;
 }
 
 .form-input-field button {
@@ -111,6 +125,10 @@ footer {
     padding-left: 0;
 }
 
+.footer-right li {
+    margin: 10px 0 10px 0;
+}
+
 .footer-right a {
-    color: black;
+    color: white;
 }
