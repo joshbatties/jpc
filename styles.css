@@ -86,4 +86,39 @@ body, html {
 .white-section {
     height: 100vh;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.white-section h2 {
+    font-size: 2em;
+    margin-bottom: 40px;
+}
+
+.services {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.service {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.service p {
+    font-size: 1.2em;
+    margin: 0;
 }
