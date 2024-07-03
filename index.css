@@ -1,9 +1,16 @@
+@font-face {
+    font-family: 'HelvLight';
+    src: url('fonts/HelvLight-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow-x: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'HelvLight', Arial, sans-serif;
 }
 
 .video-background {
@@ -129,7 +136,7 @@ body, html {
     box-sizing: border-box;
 }
 
-.white-section h2 {
+.white-section h2, .text-section h2 {
     font-size: 3em; /* Increased font size */
     margin-bottom: 40px;
 }
