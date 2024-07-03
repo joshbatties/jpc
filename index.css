@@ -118,7 +118,7 @@ body, html {
 }
 
 .white-section {
-    height: 65vh; /* 30% larger than the previous 50vh */
+    height: 75vh; /* Increased height by 10% */
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -129,7 +129,7 @@ body, html {
     box-sizing: border-box;
 }
 
-.white-section h2, .text-section h2 {
+.white-section h2 {
     font-size: 3em; /* Increased font size */
     margin-bottom: 40px;
 }
@@ -138,6 +138,7 @@ body, html {
     display: flex;
     justify-content: space-around;
     width: 100%;
+    height: 100%; /* Ensure it takes the full height */
 }
 
 .service {
@@ -149,13 +150,14 @@ body, html {
 .service img {
     width: 300px; /* 50% larger than the previous 200px */
     height: auto;
-    margin-bottom: 10px;
+    margin-bottom: 20px; /* Space for text */
 }
 
 .service p {
     font-size: 1.8em; /* 50% larger than the previous 1.2em */
     margin: 0;
     font-weight: bold; /* Make text bold */
+    white-space: nowrap; /* Prevent text from wrapping */
 }
 
 /* TEXT SECTION */
