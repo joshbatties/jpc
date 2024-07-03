@@ -123,3 +123,71 @@ body, html {
     margin: 0;
     font-weight: bold; /* Make text bold */
 }
+/* FOOTER */ 
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 25vh;
+    position: relative;
+    color: white;
+    background: linear-gradient(to bottom, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5)), url('./assets/footer.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.footer-left {
+    width: 50%;
+}
+
+.footer-left form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+}
+
+.form-input-field {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+#email {
+    width: 75%;
+}
+
+#submit {
+    width: 15%;
+}
+
+.form-input-field button {
+    width: 10%;
+    height: 20px;
+}
+
+.form-checkbox {
+    display: flex;
+}
+
+.form-checkbox label {
+    margin-left: 1.5em;
+}
+
+.footer-right {
+    width: 50%;
+    text-align: center;
+}
+
+.footer-right ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-right li {
+    margin: 10px 0 10px 0;
+}
+
+.footer-right a {
+    color: white;
+}
