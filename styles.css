@@ -84,7 +84,7 @@ body, html {
 }
 
 .white-section {
-    height: 100vh;
+    height: 65vh; /* 30% larger than the previous 50vh */
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -96,7 +96,7 @@ body, html {
 }
 
 .white-section h2 {
-    font-size: 2em;
+    font-size: 3em; /* Increased font size */
     margin-bottom: 40px;
 }
 
@@ -113,12 +113,13 @@ body, html {
 }
 
 .service img {
-    width: 100px; /* Adjust size as needed */
+    width: 300px; /* 50% larger than the previous 200px */
     height: auto;
     margin-bottom: 10px;
 }
 
 .service p {
-    font-size: 1.2em;
+    font-size: 1.8em; /* 50% larger than the previous 1.2em */
     margin: 0;
+    font-weight: bold; /* Make text bold */
 }
