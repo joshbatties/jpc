@@ -2,7 +2,6 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow: hidden;
     font-family: Arial, sans-serif;
 }
 
@@ -58,4 +57,60 @@ body, html {
 
 .nav button:hover {
     color: #ccc;
+}
+
+/* FOOTER */ 
+footer {
+    display: flex;
+    height: 25vh;
+    position: relative;
+    background-color: white; /* Add a background color to see it clearly */
+}
+
+.footer-left {
+    width: 50%;
+}
+
+.footer-left form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 65%;
+}
+
+.form-input-field {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.form-input-field input {
+    width: 80%;
+}
+
+.form-input-field button {
+    width: 10%;
+    height: 20px;
+}
+
+.form-checkbox {
+    display: flex;
+}
+
+.form-checkbox label {
+    margin-left: 1.5em;
+}
+
+.footer-right {
+    width: 50%;
+    text-align: center;
+}
+
+.footer-right ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-right a {
+    color: black;
 }
