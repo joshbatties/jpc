@@ -38,15 +38,34 @@ body, html {
     margin: 0;
 }
 
-.nav {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
     display: flex;
-    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    z-index: 10;
 }
 
-.nav button {
+.navbar.scrolled {
+    background-color: white;
+}
+
+.navbar .logo-container .logo {
+    height: 50px; /* Adjust the size as needed */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.navbar .logo-container .logo:hover {
+    transform: scale(1.1);
+}
+
+.navbar .nav button {
     background: none;
     border: none;
     color: white;
@@ -56,24 +75,12 @@ body, html {
     transition: color 0.3s ease;
 }
 
-.nav button:hover {
+.navbar.scrolled .nav button {
+    color: grey;
+}
+
+.navbar .nav button:hover {
     color: #ccc;
-}
-
-.logo-container {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-
-.logo {
-    height: 50px; /* Adjust the size as needed */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.logo:hover {
-    transform: scale(1.1);
 }
 
 .white-section {
