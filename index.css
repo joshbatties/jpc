@@ -188,7 +188,7 @@ footer {
     height: 25vh;
     position: relative;
     color: white;
-    background: linear-gradient(to bottom, rgba(52, 152, 219, 0.5), rgba(41, 128, 185, 0.5)), url('../assets/footer.png');
+    background: url('../assets/footer.png');
     background-size: cover;
     background-position: center;
 }
