@@ -11,8 +11,6 @@ body, html {
     height: 100%;
     overflow-x: hidden;
     font-family: 'HelvLight', Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
 }
 
 .video-background {
@@ -188,14 +186,12 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-shrink: 0;
     height: 25vh;
     position: relative;
     color: white;
-    background: url('assets/footer.png') no-repeat center center;
+    background: url('assets/footer.png');
     background-size: cover;
-    width: 100%;
-    margin-top: auto;
+    background-position: center;
 }
 
 .footer-logo {
@@ -274,7 +270,6 @@ footer {
 .footer-right li {
     margin: 10px 0 10px 0;
 }
-
 .footer-right li::before {
     content: '•';
     color: white;
@@ -282,7 +277,6 @@ footer {
     width: 1em;
     margin-left: -1em;
 }
-
 .footer-right a {
     color: white;
 }
