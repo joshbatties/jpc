@@ -70,6 +70,7 @@ body, html {
 
 .navbar .logo-container .logo:hover {
     transform: scale(1.1);
+    content: url('assets/jpc_logo_grey.png');
 }
 
 .navbar .nav {

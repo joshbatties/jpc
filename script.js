@@ -19,3 +19,12 @@ document.getElementById('what-we-do-btn').addEventListener('click', function() {
         extraButtons.classList.add('hidden');
     }
 });
+
+const logo = document.getElementById('main-logo');
+logo.addEventListener('mouseover', function() {
+    this.src = 'assets/jpc_logo_grey.png';
+});
+
+logo.addEventListener('mouseout', function() {
+    this.src = 'assets/jpc_logo.png';
+});
