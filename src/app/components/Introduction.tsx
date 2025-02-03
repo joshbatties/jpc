@@ -1,6 +1,33 @@
+'use client';
+
 import React from "react";
 
 const Introduction = () => {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const items = [
+    { 
+      src: "/images/agriculture.webp", 
+      label: "Agriculture",
+      sectionId: "agriculture-section"
+    },
+    { 
+      src: "/images/mining.webp", 
+      label: "Mining",
+      sectionId: "mining-section"
+    },
+    { 
+      src: "/images/shipping.webp", 
+      label: "Shipping",
+      sectionId: "shipping-section"
+    },
+  ];
+
   return (
     <section className="bg-white text-black text-center pt-48 pb-16">
       <div className="container mx-auto px-4">
@@ -13,19 +40,23 @@ const Introduction = () => {
         <div className="mx-auto max-w-5xl">
           <div className="border-t border-gray-300 mb-12 w-[95%] mx-auto"></div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center">
-            {[
-              { src: "/images/agriculture.webp", label: "Agriculture" },
-              { src: "/images/mining.webp", label: "Mining" },
-              { src: "/images/shipping.webp", label: "Shipping" },
-            ].map((item, index) => (
-              <div key={index} className="text-center">
-                <img
-                  src={item.src}
-                  alt={item.label}
-                  className="w-[65%] md:w-[230px] mx-auto rounded-lg object-cover"
-                />
+            {items.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToSection(item.sectionId)}
+                className="text-center transition-transform duration-200 hover:scale-105 focus:outline-none"
+                aria-label={`Navigate to ${item.label} section`}
+              >
+                <div className="relative group">
+                  <img
+                    src={item.src}
+                    alt={item.label}
+                    className="w-[65%] md:w-[230px] mx-auto rounded-lg object-cover"
+                  />
+                  <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-200 rounded-lg" />
+                </div>
                 <p className="text-2xl md:text-3xl font-bold mt-4">{item.label}</p>
-              </div>
+              </button>
             ))}
           </div>
           <div className="border-t border-gray-300 mt-12 w-[95%] mx-auto"></div>
