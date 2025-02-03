@@ -13,7 +13,7 @@ const Footer: React.FC<FooterProps> = ({ className = '' }) => {
       className={`flex flex-col bg-black relative bg-[image:var(--watermark-bg)] bg-[75%_35%] bg-no-repeat bg-[length:auto_325%] ${className}`}
       style={{
         '--watermark-bg': `url(${watermarkPath})`,
-        fontFamily: 'Manrope, sans-serif'
+        fontFamily: 'Urbanist, sans-serif'
       } as React.CSSProperties}
     >
       <div className="flex flex-col md:flex-row items-center gap-8 p-[5vh] px-[5vw]">
