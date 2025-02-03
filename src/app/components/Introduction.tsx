@@ -2,7 +2,7 @@ import React from "react";
 
 const Introduction = () => {
   return (
-    <section className="bg-white text-black text-center py-16">
+    <section className="bg-white text-black text-center pt-48 pb-16">
       <div className="container mx-auto px-4">
         <h1 className="text-4xl md:text-7xl font-medium mb-32">
           JPC Group is a diversified group of companies with our head office located in Melbourne, Australia.
@@ -11,11 +11,10 @@ const Introduction = () => {
           A leader in integrated solutions:
         </p>
         <div className="mx-auto max-w-5xl">
-          <div className="border-t border-gray-300 mb-4 w-[95%] mx-auto"></div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 items-center justify-center">
+          <div className="border-t border-gray-300 mb-12 w-[95%] mx-auto"></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center">
             {[
               { src: "/images/agriculture.webp", label: "Agriculture" },
-              { src: "/images/building-supply.webp", label: "Building Supply" },
               { src: "/images/mining.webp", label: "Mining" },
               { src: "/images/shipping.webp", label: "Shipping" },
             ].map((item, index) => (
@@ -25,11 +24,11 @@ const Introduction = () => {
                   alt={item.label}
                   className="w-[65%] md:w-[230px] mx-auto rounded-lg object-cover"
                 />
-                <p className="text-xl font-bold mt-1">{item.label}</p>
+                <p className="text-2xl md:text-3xl font-bold mt-4">{item.label}</p>
               </div>
             ))}
           </div>
-          <div className="border-t border-gray-300 mt-4 w-[95%] mx-auto"></div>
+          <div className="border-t border-gray-300 mt-12 w-[95%] mx-auto"></div>
         </div>
       </div>
     </section>
