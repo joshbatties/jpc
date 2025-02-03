@@ -4,6 +4,7 @@ import Introduction from './components/Introduction';
 import ShippingSection from './components/ShippingSection';
 import MiningSection from './components/MiningSection';
 import AgricultureSection from './components/AgricultureSection';
+import ContactForm from './components/ContactForm';
 export default function Home() {
   return (
     <div>
@@ -12,6 +13,7 @@ export default function Home() {
       <ShippingSection />
       <MiningSection />
       <AgricultureSection />
+      <ContactForm />
     </div>
   );
 }

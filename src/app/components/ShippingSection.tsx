@@ -97,7 +97,7 @@ const ShippingSection = () => {
   }, [headerInView, isCompletelyHidden, isLargeScreen]);
 
   return (
-    <>
+    <section id="shipping-section">
       {/* Hero Section */}
       <div
         ref={headerRef}
@@ -169,7 +169,7 @@ const ShippingSection = () => {
           </div>
         </div>
       </section>
-    </>
+    </section>
   );
 };
 
