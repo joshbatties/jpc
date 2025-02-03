@@ -2,6 +2,8 @@
 
 import React, { useRef, useState, useEffect } from "react";
 
+const TRANSITION_BREAKPOINT = 1640;
+
 const ShippingSection = () => {
   const services = [
     {
@@ -20,13 +22,33 @@ const ShippingSection = () => {
         "Providing global air and ocean services, our freight forwarding solutions ensure seamless door-to-door delivery and customs clearance, making international shipping hassle-free.",
     },
   ];
+  
   const headerRef = useRef(null);
   const [headerInView, setHeaderInView] = useState(false);
   const [isCompletelyHidden, setIsCompletelyHidden] = useState(false);
   const [frameHeight, setFrameHeight] = useState("100vh");
   const [bgSize, setBgSize] = useState("150%");
+  const [isLargeScreen, setIsLargeScreen] = useState(true);
+
+  // Check if we're on a large enough screen for transitions
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsLargeScreen(window.innerWidth >= TRANSITION_BREAKPOINT);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   useEffect(() => {
+    if (!isLargeScreen) {
+      setFrameHeight("42vh"); // 70% of original 60vh for mobile/tablet
+      setBgSize("cover");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         setHeaderInView(entry.intersectionRatio >= 0.65);
@@ -56,9 +78,11 @@ const ShippingSection = () => {
         hiddenObserver.unobserve(headerRef.current);
       }
     };
-  }, []);
+  }, [isLargeScreen]);
 
   useEffect(() => {
+    if (!isLargeScreen) return;
+
     if (headerInView && !isCompletelyHidden) {
       setFrameHeight("60vh");
 
@@ -70,19 +94,23 @@ const ShippingSection = () => {
         setBgSize("120%");
       }, 1000);
     }
-  }, [headerInView, isCompletelyHidden]);
+  }, [headerInView, isCompletelyHidden, isLargeScreen]);
 
   return (
     <>
       {/* Hero Section */}
       <div
         ref={headerRef}
-        className="relative w-full overflow-hidden transition-[height] duration-[1200ms] ease-in-out"
+        className={`relative w-full overflow-hidden ${
+          isLargeScreen ? "transition-[height] duration-[1200ms] ease-in-out" : ""
+        }`}
         style={{ height: frameHeight }}
       >
         {/* Background image div */}
         <div
-          className="absolute inset-0 transition-[background-size] duration-1000 ease-in-out"
+          className={`absolute inset-0 ${
+            isLargeScreen ? "transition-[background-size] duration-1000 ease-in-out" : ""
+          }`}
           style={{
             backgroundImage: "url('/images/_shipping.webp')",
             backgroundPosition: "center",
@@ -95,12 +123,17 @@ const ShippingSection = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="mx-auto max-w-5xl px-4">
             <h1
-              className={`transition-all duration-500 ease-in-out font-semibold text-left leading-[0.75] tracking-[0.035] ${
-                headerInView
-                  ? "text-[10rem] opacity-100 scale-100"
-                  : "text-[9rem] opacity-0 scale-90"
-              } text-white`} style={{ 
-                transform: "translateX(-35%)",
+              className={`font-semibold text-left leading-[0.75] tracking-[0.035] text-white
+                ${isLargeScreen 
+                  ? `transition-all duration-500 ease-in-out ${
+                      headerInView
+                        ? "text-[10rem] opacity-100 scale-100"
+                        : "text-[9rem] opacity-0 scale-90"
+                    }`
+                  : "text-7xl md:text-[9.5rem] 2xl:text-[10rem]"
+                }`}
+              style={{ 
+                transform: isLargeScreen ? "translateX(-35%)" : "none",
                 textShadow: '2px 2px 8px rgba(0, 0, 0, 0.2)'
               }}
             >
@@ -136,7 +169,7 @@ const ShippingSection = () => {
           </div>
         </div>
       </section>
-      </>
+    </>
   );
 };
 
