@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 import Lottie from 'lottie-react';
-import loadingAnimation from '../assets/animations/loading-spinner.json';
+import loadingAnimation from '../../assets/animations/loading-spinner.json';
 
 const LoadingSpinner = () => {
   return (
