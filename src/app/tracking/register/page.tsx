@@ -1,141 +1,161 @@
-// auth.ts
-import NextAuth from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials"
-import { createClient } from '@supabase/supabase-js'
-import bcrypt from 'bcryptjs'
+// src/app/tracking/register/page.tsx
+'use client'
 
-// Initialize Supabase client
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
+import { useState } from 'react'
+import { useSearchParams, useRouter } from 'next/navigation'
 
-// Validate registration token function
-export const validateRegistrationToken = async (token: string, email: string) => {
-  const { data: tokenData, error } = await supabase
-    .from('registration_tokens')
-    .select('*')
-    .eq('token', token)
-    .eq('email', email)
-    .eq('used', false)
-    .gt('expires_at', new Date().toISOString())
-    .single()
+export default function RegisterPage() {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const [formData, setFormData] = useState({
+    email: '',
+    username: '',
+    password: '',
+    confirmPassword: ''
+  })
+  const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  if (error || !tokenData) return null
-  return tokenData
-}
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError('')
+    setLoading(true)
 
-// Mark token as used
-export const markTokenUsed = async (token: string) => {
-  await supabase
-    .from('registration_tokens')
-    .update({ used: true })
-    .eq('token', token)
-}
-
-// Generate registration token
-export const generateRegistrationToken = async (email: string) => {
-  const token = Math.random().toString(36).slice(2, 8).toUpperCase()
-  const expires_at = new Date()
-  expires_at.setHours(expires_at.getHours() + 24) // 24 hour expiration
-
-  const { error } = await supabase
-    .from('registration_tokens')
-    .insert({
-      token,
-      email,
-      expires_at: expires_at.toISOString(),
-    })
-
-  if (error) throw error
-
-  return `${process.env.NEXTAUTH_URL}/tracking/register?token=${token}`
-}
-
-export const { auth, signIn, signOut } = NextAuth({
-  providers: [
-    CredentialsProvider({
-      name: "Credentials",
-      credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" }
-      },
-      async authorize(credentials) {
-        if (!credentials?.username || !credentials?.password) return null
-        
-        try {
-          // Get user from database
-          const { data: user, error } = await supabase
-            .from('users')
-            .select('*')
-            .eq('username', credentials.username)
-            .single()
-
-          if (error || !user) return null
-
-          // Verify password
-          const passwordValid = await bcrypt.compare(credentials.password, user.password)
-          if (!passwordValid) return null
-
-          // Return user object
-          return {
-            id: user.id,
-            username: user.username,
-            email: user.email,
-            companyCode: user.company_code
-          }
-        } catch (error) {
-          console.error('Auth error:', error)
-          return null
-        }
-      }
-    })
-  ],
-  session: {
-    strategy: "jwt",
-    maxAge: 14 * 24 * 60 * 60, // 14 days
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.username = user.username
-        token.companyCode = user.companyCode
-      }
-      return token
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.username = token.username as string
-        session.user.companyCode = token.companyCode as string
-      }
-      return session
+    const token = searchParams.get('token')
+    if (!token) {
+      setError('Invalid registration link')
+      setLoading(false)
+      return
     }
-  },
-  pages: {
-    signIn: '/tracking/login',
-    error: '/tracking/error'
-  }
-})
 
-// Type augmentation for Session
-declare module "next-auth" {
-  interface Session {
-    user: {
-      username: string
-      companyCode: string
-    } & DefaultSession["user"]
+    if (formData.password !== formData.confirmPassword) {
+      setError('Passwords do not match')
+      setLoading(false)
+      return
+    }
+
+    try {
+      const response = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token,
+          ...formData
+        })
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Registration failed')
+      }
+
+      // Redirect to login page with success message
+      router.push('/tracking/login?registered=true')
+    } catch (error: any) {
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  interface User {
-    username: string
-    companyCode: string
-  }
-}
+  return (
+    <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white">
+      <div className="w-full max-w-md">
+        <h1 className="text-4xl font-bold mb-8 tracking-tight text-black text-center">
+          Create your account
+        </h1>
 
-// Type augmentation for JWT
-declare module "next-auth/jwt" {
-  interface JWT {
-    username: string
-    companyCode: string
-  }
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={formData.email}
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  email: e.target.value
+                }))}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="username" className="block text-sm font-medium text-gray-700">
+                Username
+              </label>
+              <input
+                type="text"
+                id="username"
+                value={formData.username}
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  username: e.target.value
+                }))}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                value={formData.password}
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  password: e.target.value
+                }))}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  confirmPassword: e.target.value
+                }))}
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                required
+                disabled={loading}
+              />
+            </div>
+
+            {error && (
+              <div className="text-sm text-red-600">
+                {error}
+              </div>
+            )}
+
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-2 px-4 rounded-full hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={loading}
+            >
+              {loading ? 'Creating account...' : 'Create account'}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  )
 }

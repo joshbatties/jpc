@@ -1,14 +1,23 @@
-// app/tracking/page.tsx
 'use client';
 
 import React, { useState, useCallback } from 'react';
-import { Search, RotateCcw, Building2, HelpCircle } from 'lucide-react';
-import { useTracking } from '@/hooks/useTracking';
-import type { TrackingParams } from '@/lib/types/api';
-import ShipmentResults from '../../components/tracking/ShipmentResults';
-import HelpForm from '../../components/tracking/HelpForm';
-import LoadingSpinner from '../../components/LoadingSpinner';
-import { useRouter } from 'next/navigation';
+import { Search, RotateCcw, Building2, HelpCircle, Ship } from 'lucide-react';
+import { useTracking } from '../../hooks/useTracking';
+import type { TrackingParams } from '../../lib/types/api';
+import CompanyResults from './CompanyResults';
+import type { ShipmentData } from '../../lib/types/tracking';
+import ShipmentResults from './ShipmentResults';
+import HelpForm from './HelpForm';
+import LoadingSpinner from '../LoadingSpinner';
+
+interface TrackingHookReturn {
+  data: ShipmentData[] | null;
+  error: string | null;
+  loading: boolean;
+  isSearching: boolean;
+  searchTracking: (params: TrackingParams) => Promise<void>;
+  clearSearch: () => void;
+}
 
 const normalizeBookingNumber = (input: string): string => {
   const cleaned = input.trim().toUpperCase();
@@ -20,19 +29,25 @@ const normalizeBookingNumber = (input: string): string => {
 };
 
 const ShipmentTracker: React.FC = () => {
-  const router = useRouter();
+  const [isCompanyMode, setIsCompanyMode] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showHelpForm, setShowHelpForm] = useState(false);
 
-  const { data, error, loading, isSearching, searchTracking, clearSearch } = useTracking();
+  const { data, error, loading, isSearching, searchTracking, clearSearch } = useTracking() as TrackingHookReturn;
 
   const handleSearch = useCallback(() => {
     if (!inputValue.trim() || isSearching) return;
   
-    const normalizedInput = normalizeBookingNumber(inputValue);
-    const params: TrackingParams = { trackingNumber: normalizedInput };
+    const normalizedInput = isCompanyMode 
+      ? inputValue.trim().toUpperCase()
+      : normalizeBookingNumber(inputValue);
+    
+    const params: TrackingParams = isCompanyMode 
+      ? { companyCode: normalizedInput }
+      : { trackingNumber: normalizedInput };
+  
     searchTracking(params);
-  }, [inputValue, isSearching, searchTracking]);
+  }, [inputValue, isCompanyMode, isSearching, searchTracking]);
 
   const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && inputValue.trim() && !isSearching) {
@@ -40,15 +55,25 @@ const ShipmentTracker: React.FC = () => {
     }
   }, [handleSearch, inputValue, isSearching]);
 
+  const toggleMode = useCallback(() => {
+    setIsCompanyMode(prev => !prev);
+    setInputValue('');
+    clearSearch();
+  }, [clearSearch]);
+
   const clearInput = useCallback(() => {
     setInputValue('');
     clearSearch();
   }, [clearSearch]);
 
+  const placeholderText = isCompanyMode 
+    ? "Enter your company code" 
+    : "Enter your container, PO or Booking number";
+
   return (
     <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white">
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 md:mb-12 tracking-tight text-black">
-        Track a shipment
+        {isCompanyMode ? 'Track your shipments' : 'Track a shipment'}
       </h1>
 
       <div className="w-full max-w-2xl lg:max-w-4xl mb-16">
@@ -65,11 +90,12 @@ const ShipmentTracker: React.FC = () => {
             <input
               type="text"
               className="flex-grow px-2 md:px-4 outline-none text-sm md:text-lg text-black"
-              placeholder="Enter your container, PO or Booking number"
+              placeholder={window.innerWidth > 768 ? placeholderText : ''}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={loading}
+              aria-label={isCompanyMode ? "Company code input" : "Tracking number input"}
             />
             <button 
               onClick={clearInput}
@@ -87,6 +113,9 @@ const ShipmentTracker: React.FC = () => {
               {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
+          <div className="mt-2 text-xs text-gray-500 text-center md:hidden">
+            {placeholderText}
+          </div>
           {error && (
             <div className="absolute top-full mt-2 text-sm text-red-500 w-full text-center">
               {error}
@@ -100,26 +129,45 @@ const ShipmentTracker: React.FC = () => {
           </div>
 
           <div className={`transition-all duration-500 ease-in-out ${!loading && data ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-            {data && <ShipmentResults data={data} />}
+            {data && isCompanyMode && (
+              <div className="w-full mb-8">
+                <CompanyResults 
+                  data={data} 
+                  customerCode={inputValue}
+                />
+              </div>
+            )}
+
+            {data && !isCompanyMode && (
+              <div className="w-full mb-8">
+                <ShipmentResults data={data} />
+              </div>
+            )}
           </div>
         </div>
 
         <div className="flex justify-center space-x-8 mt-8">
           <div className="flex flex-col items-center w-44">
             <button 
-              onClick={() => router.push('/tracking/login')}
+              onClick={toggleMode}
               className="flex flex-col items-center group transition-transform duration-200 hover:scale-105"
               disabled={loading}
             >
               <div className="p-5 rounded-full bg-gray-50 group-hover:bg-gray-100 group-hover:shadow-md transition-all duration-200">
-                <Building2 className="w-7 h-7 text-gray-600" />
+                {isCompanyMode ? 
+                  <Ship className="w-7 h-7 text-gray-600" /> : 
+                  <Building2 className="w-7 h-7 text-gray-600" />
+                }
               </div>
             </button>
             <h2 className="text-sm font-medium text-gray-900 mt-3 mb-1">
-              Company Login
+              {isCompanyMode ? "Track a Shipment" : "Track by Company Code"}
             </h2>
             <p className="text-xs text-gray-500 text-center">
-              Sign in to see all your shipments
+              {isCompanyMode ? 
+                "Search by container, PO or Booking number" : 
+                "See all of your company's shipments"
+              }
             </p>
           </div>
 

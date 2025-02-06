@@ -1,7 +1,7 @@
 import React from 'react';
 import './globals.css';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { Urbanist } from "next/font/google";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
@@ -11,16 +11,18 @@ export const metadata = {
   description: "Welcome to JPC Group - Your trusted partner in business solutions.",
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+export default function RootLayout({ 
+  children 
+}: { 
+  children: React.ReactNode 
+}) {
   return (
     <html lang="en" className={urbanist.className}>
       <body className="flex flex-col min-h-screen">
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
+        <Header />
+        <main className="flex-grow">{children}</main>
+        <Footer />
       </body>
     </html>
   );
-};
-
-export default Layout;
+}

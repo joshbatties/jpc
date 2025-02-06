@@ -1,0 +1,123 @@
+
+> jpc@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.1.6
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.110.35:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 4.2s
+ ⚠ Your project has `@next/font` installed as a dependency, please use the built-in `next/font` instead. The `@next/font` package will be removed in Next.js 14. You can migrate by running `npx @next/codemod@latest built-in-next-font .`. Read more: https://nextjs.org/docs/messages/built-in-next-font
+ ○ Compiling / ...
+ ✓ Compiled / in 3.3s (633 modules)
+ ⨯ ReferenceError: document is not defined
+    at (ssr)/./node_modules/lottie-web/build/player/lottie.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-web.js:19:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at (ssr)/./node_modules/lottie-react/build/index.es.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-react.js:20:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/LoadingSpinner.tsx:9:70)
+    at (ssr)/./src/components/LoadingSpinner.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\page.js:214:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/ContactForm.tsx:9:73)
+    at (ssr)/./src/components/ContactForm.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\page.js:181:1)
+    at Object.__webpack_require__ [as require] (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43) {
+  digest: '1540759723'
+}
+ ✓ Compiled in 1464ms (303 modules)
+ GET / 500 in 4855ms
+ ○ Compiling /src/middleware ...
+ ✓ Compiled /src/middleware in 672ms (200 modules)
+ ○ Compiling /tracking ...
+ ✓ Compiled /tracking in 1130ms (658 modules)
+ ⨯ ReferenceError: document is not defined
+    at (ssr)/./node_modules/lottie-web/build/player/lottie.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-web.js:19:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at (ssr)/./node_modules/lottie-react/build/index.es.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-react.js:20:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/LoadingSpinner.tsx:9:70)
+    at (ssr)/./src/components/LoadingSpinner.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:192:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/tracking/HelpForm.tsx:9:73)
+    at (ssr)/./src/components/tracking/HelpForm.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:203:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/app/tracking/page.tsx:15:87)
+    at (ssr)/./src/app/tracking/page.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:170:1)
+    at Object.__webpack_require__ [as require] (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at JSON.parse (<anonymous>) {
+  digest: '1462399620'
+}
+ GET /tracking 500 in 2123ms
+ ⨯ ReferenceError: document is not defined
+    at (ssr)/./node_modules/lottie-web/build/player/lottie.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-web.js:19:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at (ssr)/./node_modules/lottie-react/build/index.es.js (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\vendor-chunks\lottie-react.js:20:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/LoadingSpinner.tsx:9:70)
+    at (ssr)/./src/components/LoadingSpinner.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:192:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/components/tracking/HelpForm.tsx:9:73)
+    at (ssr)/./src/components/tracking/HelpForm.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:203:1)
+    at __webpack_require__ (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at eval (webpack-internal:///(ssr)/./src/app/tracking/page.tsx:15:87)
+    at (ssr)/./src/app/tracking/page.tsx (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\app\tracking\page.js:170:1)
+    at Object.__webpack_require__ [as require] (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\.next\server\webpack-runtime.js:33:43)
+    at JSON.parse (<anonymous>) {
+  digest: '1462399620'
+}
+ GET /tracking 500 in 501ms
+ ○ Compiling /tracking/login ...
+ ✓ Compiled /tracking/login in 530ms (727 modules)
+ GET /tracking/login 200 in 627ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 513ms (731 modules)
+ GET /api/auth/providers 404 in 657ms
+ POST /api/auth/_log 404 in 319ms
+ GET /api/auth/error 404 in 315ms
+ ✓ Compiled in 385ms (354 modules)
+ ✓ Compiled /_not-found in 393ms (731 modules)
+ GET /api/auth/error 404 in 492ms
+ GET /api/auth/error 404 in 54ms
+ ✓ Compiled in 146ms (357 modules)
+ GET /api/auth/error 404 in 16ms
+ GET /api/auth/error 404 in 19ms
+ ✓ Compiled in 216ms (357 modules)
+ ○ Compiling /api/auth/[...nextauth] ...
+ ✓ Compiled /api/auth/[...nextauth] in 2.2s (938 modules)
+ ⨯ No HTTP methods exported in 'C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\src\app\api\auth\[...nextauth]\route.ts'. Export a named export for each HTTP method.
+ ⨯ No HTTP methods exported in 'C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\src\app\api\auth\[...nextauth]\route.ts'. Export a named export for each HTTP method.
+ GET /api/auth/error 405 in 3933ms
+ GET /api/auth/error 405 in 24ms
+ GET /api/auth/error 405 in 8ms
+ GET /api/auth/error 405 in 11ms
+ ⨯ No HTTP methods exported in 'C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\src\app\api\auth\[...nextauth]\route.ts'. Export a named export for each HTTP method.
+ ⨯ ./src/app/api/auth/[...nextauth]/route.ts:1:1
+Module not found: Can't resolve '@/src/auth'
+> 1 | import NextAuth from "@/src/auth"
+    | ^
+  2 |
+  3 | export const { GET, POST } = NextAuth
+  4 |
+
+https://nextjs.org/docs/messages/module-not-found
+node:internal/child_process:511
+      this.emit('error', new ErrnoException(err, 'kill'));
+                         ^
+
+Error: kill EPERM
+    at ChildProcess.kill (node:internal/child_process:511:26)
+    at handleSessionStop (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\node_modules\next\dist\cli\next-dev.js:91:71)
+    at process.<anonymous> (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\node_modules\next\dist\cli\next-dev.js:145:26)
+    at process.emit (node:events:518:28)
+Emitted 'error' event on ChildProcess instance at:
+    at ChildProcess.kill (node:internal/child_process:511:12)
+    at handleSessionStop (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\node_modules\next\dist\cli\next-dev.js:91:71)
+    at process.<anonymous> (C:\Users\joshb\OneDrive\Documents\GitHub\jpc\jpc-1\node_modules\next\dist\cli\next-dev.js:145:26)
+    at process.emit (node:events:518:28) {
+  errno: -4048,
+  code: 'EPERM',
+  syscall: 'kill'
+}
+
+Node.js v22.11.0

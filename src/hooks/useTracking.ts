@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
-import { TrackingService } from '../services/api/tracking';
-import type { ShipmentData, TrackingState } from '../types/tracking';
-import type { TrackingParams } from '../services/api/types';
+import { TrackingService } from '../lib/services/tracking';
+import type { ShipmentData, TrackingState } from '../lib/types/tracking';
+import type { TrackingParams } from '../lib/types/api';
 
 export const useTracking = () => {
   const [state, setState] = useState<TrackingState>({
