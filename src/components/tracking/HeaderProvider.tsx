@@ -1,12 +1,12 @@
 'use client'
 
 import { SessionProvider } from 'next-auth/react'
-import Header from './Header'
+import TrackingHeader from './TrackingHeader'
 
 export default function HeaderWithProvider() {
   return (
     <SessionProvider>
-      <Header />
+      <TrackingHeader />
     </SessionProvider>
   )
 }

@@ -31,7 +31,7 @@ const Introduction = () => {
   return (
     <section className="bg-white text-black text-center pt-48 pb-16">
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl md:text-7xl font-medium mb-32">
+        <h1 className="max-w-[1200px] mx-auto text-4xl md:text-7xl font-medium mb-32">
           JPC Group is a diversified group of companies with our head office located in Melbourne, Australia.
         </h1>
         <p className="text-3xl md:text-6xl mb-8">

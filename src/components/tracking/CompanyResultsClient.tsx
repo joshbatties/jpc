@@ -54,7 +54,7 @@ export function CompanyResultsClient({ customerCode }: CompanyResultsClientProps
   if (!data) return null
 
   return (
-    <div className="max-w-10xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className=" mx-auto px-4 sm:px-6 lg:px-8">
       <CompanyResults data={data} customerCode={customerCode} />
     </div>
   )

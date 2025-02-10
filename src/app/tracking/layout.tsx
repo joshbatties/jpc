@@ -1,3 +1,5 @@
+// app/tracking/layout.tsx
+
 import HeaderProvider from '../../components/tracking/HeaderProvider'
 
 export default function TrackingLayout({

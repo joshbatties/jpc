@@ -45,6 +45,8 @@ const ShipmentTracker: React.FC = () => {
     clearSearch();
   }, [clearSearch]);
 
+  const placeholderText = "Enter your container, PO or Booking number";
+
   return (
     <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white">
       <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 md:mb-12 tracking-tight text-black">
@@ -65,7 +67,7 @@ const ShipmentTracker: React.FC = () => {
             <input
               type="text"
               className="flex-grow px-2 md:px-4 outline-none text-sm md:text-lg text-black"
-              placeholder="Enter your container, PO or Booking number"
+              placeholder={window.innerWidth > 768 ? placeholderText : ''}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -87,22 +89,25 @@ const ShipmentTracker: React.FC = () => {
               {loading ? 'Searching...' : 'Search'}
             </button>
           </div>
+          <div className="mt-2 text-xs text-gray-500 text-center md:hidden">
+            {placeholderText}
+          </div>
           {error && (
-            <div className="absolute top-full mt-2 text-sm text-red-500 w-full text-center">
+            <div className="absolute top-full mt-2 text-sm text-red-600 w-full text-center">
               {error}
             </div>
           )}
         </div>
 
-        <div className="relative transition-all duration-500 ease-in-out mb-8">
-          <div className={`transition-all duration-500 ease-in-out ${loading ? 'opacity-100 h-40 mb-12' : 'opacity-0 h-0 overflow-hidden'}`}>
+        {loading && (
+          <div className="flex justify-center items-center py-12">
             <LoadingSpinner />
           </div>
+        )}
 
-          <div className={`transition-all duration-500 ease-in-out ${!loading && data ? 'opacity-100' : 'opacity-0 h-0 overflow-hidden'}`}>
-            {data && <ShipmentResults data={data} />}
-          </div>
-        </div>
+        {!loading && data && (
+          <ShipmentResults data={data} />
+        )}
 
         <div className="flex justify-center space-x-8 mt-8">
           <div className="flex flex-col items-center w-44">
@@ -119,7 +124,7 @@ const ShipmentTracker: React.FC = () => {
               Company Login
             </h2>
             <p className="text-xs text-gray-500 text-center">
-              Sign in to see all your shipments
+              See all your shipments
             </p>
           </div>
 

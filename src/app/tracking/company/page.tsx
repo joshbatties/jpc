@@ -13,8 +13,7 @@ export default async function CompanyPage() {
   
   return (
     <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white">
-      <div className="w-full max-w-[1000px] lg:max-w-4xl mb-16">
-        {/* Header with Sign Out */}
+      <div className="w-full max-w-[1200px] lg:max-w-4xl mb-16">
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-9xl md:text-4xl lg:text-9xl sm:text-2xl font-bold tracking-tight text-black">

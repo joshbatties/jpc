@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 
-const Header = () => {
+const TrackingHeader = () => {
   const { data: session } = useSession()
   const router = useRouter()
   const [showProfileMenu, setShowProfileMenu] = useState(false)
@@ -24,23 +24,34 @@ const Header = () => {
     }, 100)
   }
 
+  const buttonClasses = "px-4 md:px-8 py-3 text-2xl md:text-3xl font-medium transition-all duration-200 rounded-full hover:scale-105 text-black hover:text-gray-600"
   return (
-    <header className="w-full flex justify-between items-center py-4 px-4 bg-white">
-      <div className="flex-1" />
+    <header className="tracking-header w-full flex justify-between items-center py-6 px-2 md:px-4 bg-white">
+      {/* Left: Home button */}
+      <div className="flex-1 flex justify-start">
+        <button
+          onClick={() => router.push('/')}
+          className={buttonClasses}
+        >
+          Home
+        </button>
+      </div>
       
+      {/* Center: Logo */}
       <div className="flex justify-center flex-1">
         <a 
           href="https://jpcgroup.com" 
           className="transition-transform duration-200 ease-in-out hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-lg"
         >
           <img 
-            src="images/jpc-logo.png" 
+            src="/images/jpc-logo.png" 
             alt="JPC International" 
             className="h-7 md:h-10"
           />
         </a>
       </div>
 
+      {/* Right: Auth UI */}
       <div className="flex-1 flex justify-end relative">
         {session?.user ? (
           <div
@@ -86,7 +97,7 @@ const Header = () => {
         ) : (
           <button
             onClick={() => router.push('/tracking/login')}
-            className="px-6 py-2 rounded-full border border-gray-100 text-black hover:bg-gray-50 transition-colors duration-200"
+            className="px-4 md:px-8 py-3 text-2xl md:text-3xl font-medium rounded-full border border-gray-100 text-black hover:bg-gray-50 transition-all duration-200 hover:scale-105"
           >
             Log in
           </button>
@@ -96,4 +107,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default TrackingHeader

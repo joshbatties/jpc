@@ -1,8 +1,8 @@
-// src/app/tracking/register/page.tsx
 'use client'
 
 import { useState } from 'react'
 import { useSearchParams, useRouter } from 'next/navigation'
+import { Eye, EyeOff } from 'lucide-react'
 
 export default function RegisterPage() {
   const searchParams = useSearchParams()
@@ -15,6 +15,8 @@ export default function RegisterPage() {
   })
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,9 +62,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white">
+    <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white mb-20">
       <div className="w-full max-w-md">
-        <h1 className="text-4xl font-bold mb-8 tracking-tight text-black text-center">
+        <h1 className="text-5xl font-bold mb-8 tracking-tight text-black text-center">
           Create your account
         </h1>
 
@@ -80,7 +82,7 @@ export default function RegisterPage() {
                   ...prev,
                   email: e.target.value
                 }))}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black"
                 required
                 disabled={loading}
               />
@@ -98,7 +100,7 @@ export default function RegisterPage() {
                   ...prev,
                   username: e.target.value
                 }))}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black"
                 required
                 disabled={loading}
               />
@@ -108,36 +110,54 @@ export default function RegisterPage() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password
               </label>
-              <input
-                type="password"
-                id="password"
-                value={formData.password}
-                onChange={(e) => setFormData(prev => ({
-                  ...prev,
-                  password: e.target.value
-                }))}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                required
-                disabled={loading}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    password: e.target.value
+                  }))}
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black"
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
                 Confirm Password
               </label>
-              <input
-                type="password"
-                id="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={(e) => setFormData(prev => ({
-                  ...prev,
-                  confirmPassword: e.target.value
-                }))}
-                className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
-                required
-                disabled={loading}
-              />
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    confirmPassword: e.target.value
+                  }))}
+                  className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 text-black"
+                  required
+                  disabled={loading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
 
             {error && (
@@ -148,7 +168,7 @@ export default function RegisterPage() {
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-2 px-4 rounded-full hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-black text-white py-2 px-4 rounded-full hover:bg-white hover:text-black hover:border hover:border-black disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               disabled={loading}
             >
               {loading ? 'Creating account...' : 'Create account'}
