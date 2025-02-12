@@ -8,7 +8,7 @@ export default async function LoginPage() {
   
   // If user is authenticated, redirect to company page
   if (session?.user) {
-    redirect('/tracking/company')
+    redirect('/tracking')
   }
 
   // If not authenticated, show login form

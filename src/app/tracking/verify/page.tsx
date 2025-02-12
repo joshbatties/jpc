@@ -27,7 +27,7 @@ export default function VerifyPage() {
         if (result?.error) {
           setMessage('This link is invalid or has expired')
         } else {
-          router.push('/tracking/company')
+          router.push('/tracking/')
         }
       } catch (error) {
         setMessage('An error occurred during verification')

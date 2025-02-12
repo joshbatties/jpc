@@ -1,6 +1,5 @@
-// app/tracking/layout.tsx
-
-import HeaderProvider from '../../components/tracking/HeaderProvider'
+import { AuthProvider } from "@/components/AuthProvider"
+import HeaderWithProvider from "@/components/tracking/HeaderProvider" 
 
 export default function TrackingLayout({
   children,
@@ -8,9 +7,9 @@ export default function TrackingLayout({
   children: React.ReactNode
 }) {
   return (
-    <>
-      <HeaderProvider />
+    <AuthProvider>
+      <HeaderWithProvider />
       {children}
-    </>
+    </AuthProvider>
   )
 }

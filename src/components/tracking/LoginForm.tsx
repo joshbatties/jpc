@@ -35,7 +35,7 @@ export default function LoginForm() {
         return
       }
       if (result?.ok) {
-        router.push('/tracking/company')
+        router.push('/tracking/')
       }
     } catch {
       setError('An error occurred during login')

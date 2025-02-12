@@ -14,7 +14,7 @@ export default function CompanyActions() {
       <div className="flex justify-center space-x-8 mt-8">
         <div className="flex flex-col items-center w-44">
           <button
-            onClick={() => router.push('/tracking')}
+            onClick={() => router.push('/tracking/individual')}
             className="flex flex-col items-center group transition-transform duration-200 hover:scale-105"
           >
             <div className="p-5 rounded-full bg-gray-50 group-hover:bg-gray-100 group-hover:shadow-md transition-all duration-200">
