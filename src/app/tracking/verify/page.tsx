@@ -29,7 +29,7 @@ export default function VerifyPage() {
         } else {
           router.push('/tracking/')
         }
-      } catch (error) {
+      } catch {
         setMessage('An error occurred during verification')
       }
     }
@@ -44,3 +44,4 @@ export default function VerifyPage() {
       </div>
     </div>
   )
+}

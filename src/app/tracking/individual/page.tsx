@@ -121,7 +121,7 @@ const ShipmentTracker: React.FC = () => {
               </div>
             </button>
             <h2 className="text-sm font-medium text-gray-900 mt-3 mb-1">
-              Company Login
+              Company View
             </h2>
             <p className="text-xs text-gray-500 text-center">
               See all your shipments

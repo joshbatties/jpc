@@ -2,6 +2,29 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { createClient } from "@supabase/supabase-js";
 import bcrypt from "bcryptjs";
+import { DefaultSession, DefaultUser } from "next-auth"
+import { JWT, DefaultJWT } from "next-auth/jwt"
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      username: string
+      companyCode: string
+    } & DefaultSession["user"]
+  }
+
+  interface User extends DefaultUser {
+    username: string
+    companyCode: string
+  }
+}
+
+declare module "next-auth/jwt" {
+  interface JWT extends DefaultJWT {
+    username: string
+    companyCode: string
+  }
+}
 
 // Define allowed companies with their codes
 const ALLOWED_COMPANIES = {

@@ -8,7 +8,7 @@ export interface ShipmentData {
     'ETD': string;
     'ETA': string;
     'Delivery Address': string;
-    'Customer Code'?: string;
+    'Customer Code': string;
   }
   
   export interface TrackingState {

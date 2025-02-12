@@ -51,7 +51,7 @@ export default function LoginForm() {
   return (
     <div className="flex-1 flex flex-col items-center pt-16 md:pt-32 px-4 md:px-6 font-['Urbanist'] min-h-0 bg-white pb-24">
       <div className="w-full max-w-2xl">
-        <h1 className="text-6xl font-bold mb-8 tracking-tight text-black text-center md:text-6xl text-4xl">
+        <h1 className="text-6xl font-bold mb-8 tracking-tight text-black text-center md:text-6xl">
           <span className="md:inline hidden">Sign in to your account</span>
           <span className="md:hidden">Sign in</span>
         </h1>
@@ -155,10 +155,10 @@ export default function LoginForm() {
               </div>
             </button>
             <h2 className="text-sm font-medium text-gray-900 mt-3 mb-1 text-center w-full">
-              Don't have an account yet?
+              Don&apos;t have an account yet?
             </h2>
             <p className="text-xs text-gray-500 text-center w-full">
-              Submit a request, and we'll get you set up.
+              Submit a request, and we&apos;ll get you set up.
             </p>
           </div>
         </div>

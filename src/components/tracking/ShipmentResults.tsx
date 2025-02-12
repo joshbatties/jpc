@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 interface ShipmentData {
   "Booking Number": string;
   "Container Number": string;
@@ -11,7 +12,6 @@ interface ShipmentData {
   ETA: string;
   "Customer Code": string;
   "Delivery Address": string;
-  "Manually Updated"?: string;
 }
 
 const STATUS_LIST = [
@@ -101,6 +101,12 @@ const ShipmentResults: React.FC<ShipmentResultsProps> = ({ data }) => {
   const [progressWidth, setProgressWidth] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
+  // Calculate values needed for hooks first
+  const status = data?.[0]?.Status as ShipmentStatus;
+  const finalStepIndex = status ? STATUS_LIST.indexOf(status) : 0;
+  const totalSteps = STATUS_LIST.length;
+
+  // Group hooks together
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -110,32 +116,9 @@ const ShipmentResults: React.FC<ShipmentResultsProps> = ({ data }) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  if (!data || data.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <p className="text-gray-500">No shipments found</p>
-      </div>
-    );
-  }
-
-  const bookingNumber = data[0]["Booking Number"];
-  const status = data[0].Status as ShipmentStatus;
-  const pol = data[0].POL;
-  const pod = data[0].POD;
-  const etd = data[0].ETD;
-  const eta = data[0].ETA;
-
-  const containers = Array.from(new Set(data.map(d => d["Container Number"])));
-  const poNumbers = Array.from(new Set(data.map(d => d["PO Number"])));
-  const deliveryAddress = data[0]["Delivery Address"];
-
-  const originInfo = formatOriginOrDestination(pol, etd, true);
-  const destinationInfo = formatOriginOrDestination(pod, eta, false);
-
-  const finalStepIndex = STATUS_LIST.indexOf(status);
-  const totalSteps = STATUS_LIST.length;
-
   useEffect(() => {
+    if (!data || data.length === 0) return;
+
     if (isMobile) {
       setCurrentStep(finalStepIndex);
       setProgressWidth((finalStepIndex / (totalSteps - 1)) * 100);
@@ -181,7 +164,28 @@ const ShipmentResults: React.FC<ShipmentResultsProps> = ({ data }) => {
     };
 
     runAnimation();
-  }, [finalStepIndex, totalSteps, isMobile]);
+  }, [finalStepIndex, totalSteps, isMobile, data]);
+
+  if (!data || data.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500">No shipments found</p>
+      </div>
+    );
+  }
+
+  const bookingNumber = data[0]["Booking Number"];
+  const pol = data[0].POL;
+  const pod = data[0].POD;
+  const etd = data[0].ETD;
+  const eta = data[0].ETA;
+
+  const containers = Array.from(new Set(data.map(d => d["Container Number"])));
+  const poNumbers = Array.from(new Set(data.map(d => d["PO Number"])));
+  const deliveryAddress = data[0]["Delivery Address"];
+
+  const originInfo = formatOriginOrDestination(pol, etd, true);
+  const destinationInfo = formatOriginOrDestination(pod, eta, false);
 
   return (
     <div className="w-full max-w-2xl lg:max-w-4xl mx-auto font-['Urbanist'] space-y-12">
@@ -222,15 +226,15 @@ const ShipmentResults: React.FC<ShipmentResultsProps> = ({ data }) => {
             return (
               <div key={stepStatus}>
                 <img
-                  src={STATUS_ICONS[stepStatus]}
-                  alt={stepStatus}
-                  className="w-10 h-10 absolute transform -translate-x-1/2"
-                  style={{ 
-                    left: `${stepPosition}%`, 
-                    top: '-4rem',
-                    opacity: opacity
-                  }}
-                />
+                src={`/${STATUS_ICONS[stepStatus]}`} // Note the added / for public folder
+                alt={stepStatus}
+                className="w-10 h-10 absolute transform -translate-x-1/2"
+                style={{ 
+                  left: `${stepPosition}%`, 
+                  top: '-4rem',
+                  opacity: opacity
+                }}
+              />
                 <div 
                   className="absolute font-medium transform -translate-x-1/2 whitespace-nowrap text-sm"
                   style={{ 
